@@ -3,13 +3,10 @@ import React from 'react';
 
 function App() {
   return (
-    <div className="App">
-      
-      
+    <div className="App">      
       <header className="App-header">
         <Game />
       </header>      
-      
     </div>
   );
 }
@@ -68,12 +65,10 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
-    console.log('handleClick : ', i);
     let history = this.state.history.slice(0, this.state.stepNumber + 1);
     let current = history[history.length - 1];
     let squares = current.squares.slice();
     if(squares[i] || judgeWinner(squares)) {
-      console.log('return case');
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -87,7 +82,6 @@ class Game extends React.Component {
   }
 
   jumpTo(move) {
-    console.log('jumpTo : ', move);
     this.setState({
       stepNumber : move,
       xIsNext : move % 2 === 0,
@@ -97,13 +91,9 @@ class Game extends React.Component {
   render() {    
 
     let stepNumber = this.state.stepNumber;
-    console.log('stepNumber : ', stepNumber);
     let history = this.state.history.slice(0, stepNumber + 1);
-    console.log(history);
     let current = history[history.length - 1];
-    console.log(current);
     let squares = current.squares.slice();
-    console.log(squares);
 
     let status;
     let winner = judgeWinner(squares);
