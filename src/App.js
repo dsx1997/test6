@@ -6,6 +6,7 @@ function App() {
     <div className="App">      
       <header className="App-header">
         <Game />
+        <Palette favcol={'yellow'}/>
       </header>      
     </div>
   );
@@ -60,7 +61,7 @@ class Game extends React.Component {
         // squares : [0, 1, 2, 3, 4, 5, 6, 7, 8]
       }],
       xIsNext : true, 
-      stepNumber : 0,
+      stepNumber : 0,      
     };
   }
 
@@ -124,6 +125,45 @@ class Game extends React.Component {
       </div>
     );
   }
+}
+
+class Palette extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favouritecolor : 'red',
+    };
+    console.log('constructor');
+    console.log('favouritecolor : ', this.state.favouritecolor);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('getDerivedStateFromProps');
+    console.log('favouritecolor : ', state.favouritecolor);
+    return {favouritecolor : props.favcol};
+  }
+
+  ChangeColor() {
+    console.log('ChangeColor function');
+    console.log('before update');
+    console.log(this.state.favouritecolor);
+    this.setState({
+      favouritecolor : 'blue',
+    });    
+    console.log('after update');
+    console.log(this.state.favouritecolor);
+  }
+
+  render () {
+    console.log('Palette render part');
+    console.log('state.favourite : ', this.state.favouritecolor);
+    return (
+      <>
+        <h1>My favourite color is : {this.state.favouritecolor}</h1>
+        <button onClick={() => this.ChangeColor()} >Change Color</button>
+      </>
+    )
+  };
 }
 
 function judgeWinner(squares) {
